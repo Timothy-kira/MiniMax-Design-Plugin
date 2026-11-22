@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "design-app": {
+      "serverUrl": "http://127.0.0.1:18810/mcp"
+    },
+    "compute": {
+      "command": "uv",
+      "args": ["run", "--no-project", "--no-python-downloads", "--python", ">=3.11", "python", "-B", "${PLUGIN_ROOT}/server.py"],
+      "env": { "PYTHONIOENCODING": "utf-8" }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "MiniMax H3 与 Design 创作"
+  short_description: "整理 H3 提示词、素材限制与 MiniMax Design 商业视频创作流程"
+  default_prompt: "使用 $minimax-h3-design，把我的创意整理为制作简报、分镜和可直接使用的 H3 提示词。"

@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+*.part
+*.assembling.mp4
+.DS_Store
+Thumbs.db

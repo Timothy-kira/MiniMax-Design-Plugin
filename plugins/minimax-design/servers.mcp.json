@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "mcpServers": {
+    "minimax-design-compute": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "-B",
+        "./server.py"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8"
+      },
+      "description": "Freeze MiniMax H3 video plans, launch and monitor Colab GPU jobs, open the visual prompt and asset canvas MiniApp, and deliver verified MP4 outputs.",
+      "timeout": 120000
+    }
+  }
+}
