@@ -1,14 +1,21 @@
-# MiniMax Design
+# MiniMax Design Plugin
 
-这是本地 Codex 插件。它把 MiniMax Design 的本机 MCP、官方 `sd25-pe`、H3 Design 工作流技能和 Colab 视频执行放在同一个插件中。图标取自已安装的 MiniMax Design 客户端。
+面向 **Antigravity**、**Codex** 与 **MiniMax Code** 的本地视频与设计插件。将 MiniMax Design 本机 MCP、4 个配套工作流 Skill（`minimax-design-colab`、`minimax-h3-design`、`design-character-lookup`、`sd25-pe`）以及 Google Colab 原生 H3 / ComfyUI 视频执行整合在同一个插件包中。图标取自已安装的 MiniMax Design 客户端。
 
 ## 安装
 
-需要 Codex、Python 3.11+、uv，以及带 Colab 账户传输模块的 Relax Agent。原有账户信息保存在 Relax Agent 的用户目录，插件包不含 ADC、项目素材或模型权重。
+需要 **Antigravity / Codex / MiniMax Code**（任一）、Python 3.11+、uv，以及带 Colab 账户传输模块的 Relax Agent。原有账户信息保存在 Relax Agent 的用户目录，插件包不含 ADC、项目素材或模型权重。
 
-在插件根目录执行 `python install.py`。macOS 或 Linux 如使用 `python3`，执行 `python3 install.py`。安装器在 Windows 选择官方 uv 附带的无控制台 `uvw.exe`，其他平台选择 `uv`。插件通过管道启动工具，在 macOS 和 Linux 上为后台进程建立独立会话，运行状态写入日志。
+- **Antigravity**：将 `plugins/minimax-design` 安装或同步到 `~/.gemini/config/plugins/minimax-design`（使用 `plugin.json` 与 `mcp_config.json`）。Windows 下可将 `mcp_config.json` 中本地服务的 `command` 设为无控制台 `uvw.exe`；后台监听与工作进程支持自动通过 WMI 脱离受限作业对象。插件可复用 Antigravity 安装的 Relax Agent。[Antigravity 本地插件](https://antigravity.google/docs/ide/plugins/)
+- **Codex**：在仓库根目录执行 `python install.py`（macOS / Linux 用 `python3 install.py`）。安装器在 Windows 选择无控制台 `uvw.exe`，其他平台选择 `uv`。
+- **MiniMax Code**：将 `plugins/minimax-design` 安装或同步到 `~/.minimax/plugins/minimax-design`（使用 `.minimax-plugin/plugin.json`、`servers.mcp.json` 与内置 `skills/`）。
 
-Antigravity 使用 `plugins/minimax-design` 内的根级 `plugin.json` 和 `mcp_config.json`。可用本地插件安装入口，或将该目录放入 `~/.gemini/config/plugins/minimax-design`。在 Windows 如需静默启动，将 Antigravity 的 `mcp_config.json` 中本地服务的 `command` 设为已安装的 `uvw.exe`。插件可复用 Antigravity 安装的 Relax Agent。 [Antigravity 本地插件](https://antigravity.google/docs/ide/plugins/)
+## 配套 Skill 与适用场景
+
+- **`minimax-h3-design`**：配合本地 **MiniMax Design 画布** 整理角色/道具/场景素材、复用画布资产、撰写 H3 分镜提示词，并通过 `read_design_workflow` / `deliver_video_to_design` 与 Design 客户端双向联动。
+- **`sd25-pe`**：撰写与优化 **Seedance 2.5（SD 2.5）** 文生视频、多参考生成、关键帧、分镜与音视频编辑提示词。
+- **`design-character-lookup`**：在写分镜或分配 `<Picture N>` 前，从 MiniMax Design 画布资产中解析角色昵称、别名与固定外观设定。
+- **`minimax-design-colab`**：在 Google Colab GPU 上执行原生 H3（T2V / I2V / Ref2VA）与自定义 ComfyUI 工作流，管理模型卡、LoRA、增量素材传输、断连恢复与算力释放。
 
 Windows、macOS 和 Linux 使用同一包。插件优先在宿主系统运行经过账号验证的官方 Colab CLI，兼容当前 Windows 上的 WSL 账户配置。首次打开插件和每次新任务启动都会检查 PyPI 官方版本，按版本隔离安装，用当前账户的官方 `whoami` 验证。升级失败时尝试已验证的 0.8.0 或已有传输。正运行的任务固定其 CLI 与账户。若 Relax Agent 安装在非标准目录，通过 `H3_COLAB_RELAX_MCP` 指定其 `mcp` 目录。
 
@@ -25,7 +32,7 @@ Windows、macOS 和 Linux 使用同一包。插件优先在宿主系统运行经
 
 运行、阶段、错误和清理回执分别写到同一个任务目录的 `status.json`、`run.log`、`events.jsonl` 和 `lease.json`。桌面通知在系统通知可用时发送。后台进程独立于 Codex 对话。若电脑休眠、断网、关机或 Colab 服务长期不可用，本地监控不能保证立即释放 VM。远端进程有截止时间，VM 释放仍以 Colab 回执为准。
 
-可恢复的下载错误自动重试一次。终止失败或释放仍未确认时，监控器在 `events.jsonl` 写入 `diagnostic_required`，供后续修复读取。以已有的文件、下载或租约恢复路径处理故障，保留已验证的分段及原任务回执。
+可恢复的上传瞬断自动重试一次，分段下载按文件大小动态放宽超时并最多重试 3 次；`previous_tail` 接点参考视频采用 `crf=8` 近无损编码，长任务自动在远端脱离后台运行并由本地短 `exec` 增量轮询（支持实时 `/ws` 采样步数与瞬断续接）。终止失败或释放仍未确认时，监控器在 `events.jsonl` 写入 `diagnostic_required`，供后续修复读取。以已有的文件、下载或租约恢复路径处理故障，保留已验证的分段及原任务回执。
 
 ### 同一任务分段生成
 
@@ -70,9 +77,9 @@ Design 节点可通过 `read_design_workflow` 读取草稿与模型依赖。UI �
 
 普通 Colab 也可以通过受管 CLI 配置 `drive_cache_relative`，例如 `H3-Colab/models`。插件先核验 GPU 和可用空间，再挂载 Drive。该目录用于权重和 LoRA，ComfyUI 环境安装在 VM 本地。用 `wheelhouse` 指定与 Python、Torch 和 ComfyUI 版本匹配的预建 wheel 仓。带 SHA-256 的权重在下载时同步校验。
 
-调试时，可用 `plan_video(hold_for_generation=true)` 和 `start_video` 先准备并保留实例。状态变为 `awaiting_generation` 后，`resume_video` 接收原计划或同底模、同参考素材的更新计划，支持更换 LoRA 和提示词。计划仍以作业 ID 和 SHA-256 标识。
+调试时，可用 `plan_video(hold_for_generation=true)` 和 `start_video` 先准备并保留实例。状态变为 `awaiting_generation` 后，`resume_video` 接收原计划或同底模的更新计划，支持更换 LoRA、修改提示词以及按 `sha256` 增量更新发生变化的参考素材。计划仍以作业 ID 和 SHA-256 标识。
 
-作业报错且实例状态待确认时，状态进入 `review_pending`。用 `review_runtime` 的 `inspect` 核对原会话。确认需要保留实例时记录 `keep`，确认可释放后用 `release` 写明原因，插件再核对提供商的释放回执。
+作业报错且实例状态待确认时，状态进入 `review_pending`。用 `review_runtime` 的 `inspect`（可选 `probe_exec=True` 实测内核 `exec` 可达性，区分真可用与挂死僵尸会话）核对原会话。确认需要保留实例时记录 `keep`，确认可释放或内核不可达时用 `release` 写明原因，插件再核对提供商的释放回执。
 
 用 `configure_runtime(queue_hook="events")` 设置排队 hook，或在单次计划覆盖。默认把排队、分配、重试和结果写入 `queue-hook.json` 及 `events.jsonl`。选择 `notify` 时，排队阶段结束另发本地通知。
 
