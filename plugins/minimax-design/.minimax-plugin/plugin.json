@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "minimax-design",
   "displayName": "MiniMax Design",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "description": "Run MiniMax H3 and ComfyUI video workflows on Google Colab, manage model cards and LoRAs, and bridge outputs with MiniMax Design.",
   "author": "Akira",
   "icon": "design-icon.png",
