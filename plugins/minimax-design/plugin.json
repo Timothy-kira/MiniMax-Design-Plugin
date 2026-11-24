@@ -2,7 +2,7 @@
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "minimax-design",
   "displayName": "MiniMax Design",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Connect MiniMax Design, diagnose and run Colab video jobs, and retrieve verified local outputs.",
   "logo": "design-icon.png",
   "skills": "./skills"

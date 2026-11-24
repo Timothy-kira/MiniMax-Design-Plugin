@@ -1,0 +1,6 @@
+interface:
+  display_name: "运镜设计"
+  short_description: "拆解参考视频的机位、路径与焦点，编写连续清楚且可执行的分镜提示词"
+  default_prompt: "使用 $camera-movement 为这个场景设计具体运镜，写清起始机位、运动路径、焦点与终点构图，并保留已有剧情。"
+policy:
+  allow_implicit_invocation: true
