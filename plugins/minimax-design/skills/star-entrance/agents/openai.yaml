@@ -1,0 +1,4 @@
+interface:
+  display_name: "明星出场"
+  short_description: "设计明星下车亮相、旁观者反应、行进跟拍和人群中的出场分镜"
+  default_prompt: "请用 $star-entrance 帮我设计这段明星出场的分镜，写清人物位置、机位和剪点。"
