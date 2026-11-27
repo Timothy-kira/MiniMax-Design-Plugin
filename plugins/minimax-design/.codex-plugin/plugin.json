@@ -1,6 +1,6 @@
 {
   "name": "minimax-design",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "Run MiniMax H3 ComfyUI workflows on owned Google Colab GPU sessions and return verified local videos.",
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",

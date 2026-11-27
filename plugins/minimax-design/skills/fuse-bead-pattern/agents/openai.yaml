@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fuse Bead Pattern"
+  short_description: "Convert photos or illustrations into fuse bead charts"
+  default_prompt: "Use $fuse-bead-pattern to turn these images into bead charts."

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "minimax-design",
   "displayName": "MiniMax Design",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "Run MiniMax H3 and ComfyUI video workflows on Google Colab, manage model cards and LoRAs, and bridge outputs with MiniMax Design.",
   "author": "Akira",
   "icon": "design-icon.png",
@@ -23,6 +23,7 @@
     "skills/sd25-pe/SKILL.md",
     "skills/camera-movement/SKILL.md",
     "skills/star-entrance/SKILL.md",
-    "skills/scene-reference/SKILL.md"
+    "skills/scene-reference/SKILL.md",
+    "skills/fuse-bead-pattern/SKILL.md"
   ]
 }

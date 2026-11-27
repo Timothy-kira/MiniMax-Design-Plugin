@@ -1,6 +1,6 @@
 # MiniMax Design Plugin
 
-面向 **Antigravity**、**Codex** 与 **MiniMax Code** 的本地视频与设计插件。将 MiniMax Design 本机 MCP、7 个配套工作流 Skill（`minimax-design-colab`、`minimax-h3-design`、`design-character-lookup`、`sd25-pe`、`camera-movement`、`star-entrance`、`scene-reference`）以及 Google Colab 原生 H3 / ComfyUI 视频执行整合在同一个插件包中。图标取自已安装的 MiniMax Design 客户端。
+面向 **Antigravity**、**Codex** 与 **MiniMax Code** 的本地视频与设计插件。将 MiniMax Design 本机 MCP、8 个配套工作流 Skill（`minimax-design-colab`、`minimax-h3-design`、`design-character-lookup`、`sd25-pe`、`camera-movement`、`star-entrance`、`scene-reference`、`fuse-bead-pattern`）以及 Google Colab 原生 H3 / ComfyUI 视频执行整合在同一个插件包中。图标取自已安装的 MiniMax Design 客户端。
 
 ## 安装
 
@@ -20,6 +20,7 @@
 - **`scene-reference`**：承接灵感讨论后写好的 Markdown 剧本，根据参考图片设计或复刻场景；先逐场交付可复制的静帧提示词，再按选择生成或交用户在其他 App 使用。
 - **`star-entrance`** 用于明星或重要角色出场的分镜设计。按场面需要选用局部亮相、目击者反应、跟拍或环绕，把剪点落在人物动作和视线变化上。
 - **`design-character-lookup`**：在写分镜或分配 `<Picture N>` 前，从 MiniMax Design 画布资产中解析角色昵称、别名与固定外观设定。角色换装时从身份原图出发，按需使用本地打码工具处理三视图，核对后按用户要求保存造型。
+- **`fuse-bead-pattern`**：先逐张判断是否要转 Q 版。写实照片用宿主的图片生成工具做 Q 版底稿，已有插画直接处理。再用本地代码生成带坐标、色号和用量的拼豆图纸及透明预览，支持批次共用色号。此 Skill 不启动 Design 或 Colab。
 - **`minimax-design-colab`**：在 Google Colab GPU 上执行原生 H3（T2V / I2V / Ref2VA）与自定义 ComfyUI 工作流，管理模型卡、LoRA、增量素材传输、断连恢复与算力释放。
 
 Windows、macOS 和 Linux 使用同一包。插件优先在宿主系统运行经过账号验证的官方 Colab CLI，兼容当前 Windows 上的 WSL 账户配置。首次打开插件和每次新任务启动都会检查 PyPI 官方版本，按版本隔离安装，用当前账户的官方 `whoami` 验证。升级失败时尝试已验证的 0.8.0 或已有传输。正运行的任务固定其 CLI 与账户。若 Relax Agent 安装在非标准目录，通过 `H3_COLAB_RELAX_MCP` 指定其 `mcp` 目录。
