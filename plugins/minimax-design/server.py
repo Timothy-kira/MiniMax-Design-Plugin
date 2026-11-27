@@ -106,7 +106,7 @@ def dispatch(packet):
         versions = {"2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25"}
         return {"protocolVersion": requested if requested in versions else "2025-11-25",
                 "capabilities": {"tools": {"listChanged": False}},
-                "serverInfo": {"name": "minimax-design-compute", "version": "0.1.26"}}
+                "serverInfo": {"name": "minimax-design-compute", "version": "0.1.28"}}
     if method == "ping":
         return {}
     if method == "tools/list":

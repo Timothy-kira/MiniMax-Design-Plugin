@@ -1,6 +1,6 @@
 # MiniMax Design Plugin
 
-面向 **Antigravity**、**Codex** 与 **MiniMax Code** 的本地视频与设计插件。将 MiniMax Design 本机 MCP、6 个配套工作流 Skill（`minimax-design-colab`、`minimax-h3-design`、`design-character-lookup`、`sd25-pe`、`camera-movement`、`star-entrance`）以及 Google Colab 原生 H3 / ComfyUI 视频执行整合在同一个插件包中。图标取自已安装的 MiniMax Design 客户端。
+面向 **Antigravity**、**Codex** 与 **MiniMax Code** 的本地视频与设计插件。将 MiniMax Design 本机 MCP、7 个配套工作流 Skill（`minimax-design-colab`、`minimax-h3-design`、`design-character-lookup`、`sd25-pe`、`camera-movement`、`star-entrance`、`scene-reference`）以及 Google Colab 原生 H3 / ComfyUI 视频执行整合在同一个插件包中。图标取自已安装的 MiniMax Design 客户端。
 
 ## 安装
 
@@ -17,6 +17,7 @@
 - **`minimax-h3-design`**：配合本地 **MiniMax Design 画布** 整理角色/道具/场景素材、复用画布资产、撰写 H3 分镜提示词，并通过 `read_design_workflow` / `deliver_video_to_design` 与 Design 客户端双向联动。
 - **`sd25-pe`**：撰写与优化 **Seedance 2.5（SD 2.5）** 文生视频、多参考生成、关键帧、分镜与音视频编辑提示词。平时直接使用随包版本，仅在用户明确要求升级时更新。
 - **`camera-movement`**：创作意图明确且用户要求写或优化完整分镜提示词时，先给可用提示词，再做同版可播放的本地白模。两份一起审阅，只同步点名的修改与必要衔接。讨论想法或积累参考时只做讨论或整理。用户只要文本或局部修改时，按指定范围交付。
+- **`scene-reference`**：承接灵感讨论后写好的 Markdown 剧本，根据参考图片设计或复刻场景；先逐场交付可复制的静帧提示词，再按选择生成或交用户在其他 App 使用。
 - **`star-entrance`** 用于明星或重要角色出场的分镜设计。按场面需要选用局部亮相、目击者反应、跟拍或环绕，把剪点落在人物动作和视线变化上。
 - **`design-character-lookup`**：在写分镜或分配 `<Picture N>` 前，从 MiniMax Design 画布资产中解析角色昵称、别名与固定外观设定。角色换装时从身份原图出发，按需使用本地打码工具处理三视图，核对后按用户要求保存造型。
 - **`minimax-design-colab`**：在 Google Colab GPU 上执行原生 H3（T2V / I2V / Ref2VA）与自定义 ComfyUI 工作流，管理模型卡、LoRA、增量素材传输、断连恢复与算力释放。

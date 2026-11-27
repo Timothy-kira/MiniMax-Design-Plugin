@@ -106,7 +106,7 @@ def connect(wake=True, timeout=25):
         return result["result"]
 
     init = rpc("initialize", {"protocolVersion": "2025-03-26", "capabilities": {},
-                              "clientInfo": {"name": "minimax-design-compute", "version": "0.1.26"}})
+                              "clientInfo": {"name": "minimax-design-compute", "version": "0.1.28"}})
     headers["MCP-Protocol-Version"] = init["protocolVersion"]
     rpc("notifications/initialized", {}, notification=True)
 
